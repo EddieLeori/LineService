@@ -93,14 +93,18 @@ class LineService:
         try:
             data = request.data
             obj = json.loads(data)
+            print(obj)
             psw = obj["psw"]
             key = obj["key"]
             if self.isAllow(psw) is True:
                 if self.actions.get(key) is not None:
                     self.actions[key](obj["value"])
                     print(obj)
+            else:
+                print("action not Allow!")
             return "ok"
         except:
+            print("action except!")
             return "error!"
 
     def isAllow(self, psw):
